@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+<head>
+    <title>CSS Demo</title>
+    <meta name="alloy-status" content="ux=1,prod=0,qa=0,dev=1,roadmap=.8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script src="https://rawgit.com/clubajax/dom/master/src/dom.js"></script>
+    <style>
+
+        /* general styles */
+        body, html{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            font-size: 14px;
+            font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+        }
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        a{
+            border: 1px solid #ccc;
+            background: #eee;
+            color: #666;
+            text-decoration: none;
+            padding: 3px 6px;
+            outline: 0;
+            border-radius: 4px 4px 0 0;
+        }
+
+        :target, :target:hover{
+            border: 1px solid #363a82;
+            background: #4b51dd !important;
+            color: white;
+        }
+        .tabs a{
+            display: inline-block;
+            margin: 6px -2px 0 -2px;
+        }
+        .tabs a:hover{
+            background: #eeeec0;
+            padding-top: 6px;
+            margin-top: 0;
+        }
+        h2{
+            padding: 0 10px;
+        }
+        section{
+            padding: 10px;
+            max-width: 1310px;
+            margin: 1px auto;
+        }
+        .item1{
+            background: #ffbab7;
+        }
+        .item2{
+            background: #cdcfff;
+        }
+        .item3{
+            background: #c1ffc6;
+        }
+        .item4{
+            background: #ffcaff;
+        }
+        .item5{
+            background: #bafffd;
+        }
+
+        .user{
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: #ccc;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            border: 2px solid white;
+            font-size: 36px;
+            line-height: 0;
+            padding: 22px 0 0 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,1) inset, 1px 1px 2px rgba(0,0,0,1);
+        }
+        .user span{
+            text-shadow: 2px 2px 4px rgba(255,255,255,1);
+        }
+        .email{
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+        .name{
+            font-weight: bold;
+        }
+        .title{
+
+        }
+
+        .user,.name,.title,.email{
+            white-space: nowrap;
+        }
+
+        .bg{
+            background: #ccc;
+        }
+        .card{
+            min-width: 230px;
+            position: relative;
+            padding-top: 5px;
+            padding-left: 65px !important;
+            border: 1px solid #666;
+            border-radius: 5px;
+            box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+        /* rwd */
+        /* <= 400px */
+        @media (max-width: 400px)  {
+            .bg{ background: #eee; }
+        }
+        /* >= 600px */
+        @media (min-width: 600px)  {
+            .bg{ background: #bbb; }
+        }
+
+
+        /* examples */
+
+        .flex-box{
+            display: flex;
+            flex-flow: row wrap;
+            align-items: stretch;
+        }
+
+        .flex-box .card {
+            align-self: stretch;
+            flex: 1 1 auto;
+        }
+        .flex-box.margins .card{
+            margin: 5px;
+        }
+        .flex-box .card span{
+            display: block;
+        }
+
+
+        .block .card{
+            /* techincally uneeded, since it is the default */
+            display: block;
+        }
+        .block .card span{
+            display: block;
+        }
+
+
+        .inline .card{
+            display: inline;
+        }
+        .inline-block .card{
+            display: inline-block;
+            margin: 0;
+        }
+        .inline-block .card span{
+            display: block;
+        }
+
+        .float{
+            overflow: auto;
+        }
+        .float .card{
+            display: block;
+            float: left;
+        }
+        .float .card span{
+            display: block;
+        }
+
+        .stretchy .card{
+            width: 33%;
+        }
+
+        .blank{
+            height: 1px;
+            border: 0 !important;
+            box-shadow: none;
+        }
+
+    </style>
+    <link rel="import" href="../lib.html">
+
+    <script src="//localhost:35729/livereload.js"></script>
+
+</head>
+<body>
+    <h2>CSS Demo</h2>
+    <section class="tabs">
+        <a href="#inline" id="inline">inline</a>
+        <a href="#block" id="block">block</a>
+        <a href="#inline-block" id="inline-block">inline-block</a>
+        <a href="#inline-block stretchy" id="inline-block stretchy">inline-block stretchy</a>
+        <a href="#float" id="float">float</a>
+        <a href="#float stretchy" id="float stretchy">float stretchy</a>
+        <a href="#flex-box" id="flex-box">flex-box</a>
+        <a href="#flex-box margins" id="flex-box margins">flex-box margins</a>
+        <a href="#flex-box margins grid" id="flex-box margins grid">flex-box grid</a>
+    </section>
+
+    <section id="example" class="bg">
+        <div class="card item1">
+            <span class="user"><span>&#9822;</span></span>
+            <span class="name">Mr Mixer</span>
+            <span class="title">Pastry Artist</span>
+            <span class="email">mr@mixer.com</span>
+        </div>
+        <div class="card item2">
+            <span class="user"><span>&#9818;</span></span>
+            <span class="name">The Amazing Appleman</span>
+            <span class="title">Bobbing Specialist</span>
+            <span class="email">amazing@appleman.com</span>
+        </div>
+        <div class="card item3">
+            <span class="user"><span>&#9819;</span></span>
+            <span class="name">Superslueth</span>
+            <span class="title">Curiosity</span>
+            <span class="email">super@slueth.com</span>
+        </div>
+
+        <div class="card item4">
+            <span class="user"><span>&#9820;</span></span>
+            <span class="name">Mr Tallyman</span>
+            <span class="title">Tallyman Banana</span>
+            <span class="email">mr@tallyman.com</span>
+        </div>
+        <div class="card item5">
+            <span class="user"><span>&#9823;</span></span>
+            <span class="name">Boing Boing</span>
+            <span class="title">Rubberosity</span>
+            <span class="email">boing@boing.com</span>
+        </div>
+    </section>
+
+    <script>
+        var
+            i,
+            hasBlanks = false,
+            all = 'block,inline,inline-block,float,stretchy,flex-box,margins'.split(','),
+            node = dom.byId('example');
+
+        function blanks(add){
+            var i, nodes;
+            if(add){
+                console.log('ADD');
+                for(i = 0; i < 5; i++){
+                    dom('div', {className:'card blank'}, node);
+                }
+            }else if(hasBlanks){
+                nodes = dom.queryAll(node, '.blank');
+                console.log('REMOVE', nodes);
+                for(i = nodes.length-1; i >= 0; i--){
+                    dom.destroy(nodes[i]);
+                }
+            }
+            hasBlanks = add;
+        }
+
+        function setClassName(){
+            var
+                addBlanks = false,
+                className = (location.hash || '').replace('#','') || 'block';
+            all.forEach(function (className) {
+                node.classList.remove(className);
+            });
+            dom.classList.add(node, className);
+            blanks(className.indexOf('grid') > -1);
+        }
+        on(window, 'hashchange', setClassName);
+        setClassName();
+
+        function cleanWhiteSpace() {
+            for (i = node.childNodes.length - 1; i >= 0; i--) {
+                if (node.childNodes[i].nodeType === 3) {
+                    node.removeChild(node.childNodes[i]);
+                }
+            }
+        }
+        cleanWhiteSpace();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <title>Forms Demo</title>
+    <meta name="alloy-status" content="ux=1,prod=0,qa=0,dev=1,roadmap=.8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://rawgit.com/clubajax/dom/master/src/dom.js"></script>
+
+    <style>
+
+        /* general styles */
+        body, html{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            font-size: 14px;
+            font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+        }
+
+        h2{
+            padding-left: 20px;
+        }
+        form{
+            margin: 20px;
+        }
+        fieldset{
+            padding: 5px 0;
+            border: 0;
+        }
+        .column{
+            display: inline-block;
+            width: 50%;
+            margin: 0 -1px;
+            margin-bottom: -3px;
+        }
+        .column label{
+            display: block;
+            position: relative;
+            margin-bottom: 5px;
+            height: 35px;
+            font-size: 12px;
+        }
+
+        .column label span{
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -6px;
+            margin-left: 10px;
+
+        }
+        .column label input{
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 6px;
+            border: 1px solid #999;
+            border-radius: 4px;
+        }
+        .column label div{
+            margin: 0;
+            display: block;
+            position: absolute;
+            top:0;
+            left: 70px;
+            right: 10px;
+            bottom: 0;
+        }
+        .checks label{
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        .checks label *{
+            vertical-align: middle;
+        }
+        @media (max-width: 500px)  {
+            .column{
+                width: 100%;
+            }
+        }
+        @media (max-width: 350px)  {
+            .column label{
+                height: 50px;
+            }
+            .column label span{
+                top: 0;
+                margin-top: 0;
+                display: block;
+            }
+            .column label div{
+                top: 15px;
+                left: 10px;
+            }
+        }
+
+    </style>
+
+    <script src="//localhost:35729/livereload.js"></script>
+
+</head>
+<body>
+    <header>
+        <h2>Forms Demo</h2>
+    </header>
+
+    <form>
+        <fieldset>
+            <div class="column">
+                <label><span>First:</span><div><input type="text"></div></label>
+                <label><span>Last:</span><div><input type="text"></div></label>
+                <label><span>Age:</span><div><input type="text"></div></label>
+            </div>
+            <div class="column">
+                <label><span>Address:</span><div><input type="text"></div></label>
+                <label><span>City:</span><div><input type="text"></div></label>
+                <label><span>Zipcode:</span><div><input type="text"></div></label>
+            </div>
+        </fieldset>
+        <fieldset class="checks">
+            <label><input type="checkbox" id="border"><span>Border</span></label>
+            <label><input type="checkbox" id="margin"><span>Margin</span></label>
+            <label><input type="checkbox" id="padding"><span>Padding</span></label>
+        </fieldset>
+    </form>
+
+</body>
+</html>

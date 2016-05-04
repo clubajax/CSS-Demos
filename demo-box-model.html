@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+    <title>Box Model Demo</title>
+    <meta name="alloy-status" content="ux=1,prod=0,qa=0,dev=1,roadmap=.8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://rawgit.com/clubajax/dom/master/src/dom.js"></script>
+
+    <style>
+
+        /* general styles */
+        body, html{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            font-size: 14px;
+            font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+        }
+
+        h2{
+            padding-left: 20px;
+        }
+
+        section{
+            position: absolute;
+            top: 100px;
+            left: 30px;
+        }
+        section:last-of-type{
+            left: 260px;
+        }
+        form{
+            margin: 20px;
+        }
+        /* examples */
+
+
+        .block-container{
+            width: 200px;
+            height: 100px;
+            border: 1px dashed #000;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .abs-box,.content-box,.border-box, .default-box{
+            background: rgba(255,0,0,0.5);
+            height: 100px;
+        }
+
+        .border .abs-box,
+        .border .content-box,
+        .border .border-box,
+        .border .default-box{
+            border: 5px solid rgba(0,0,255,0.5);
+        }
+        .padding .abs-box,
+        .padding .content-box,
+        .padding .border-box,
+        .padding .default-box{
+            padding: 5px;
+        }
+        .margin .abs-box,
+        .margin .content-box,
+        .margin .border-box,
+        .margin .default-box{
+            margin: 5px;
+        }
+
+        .default-box{
+
+        }
+        .abs-box{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: auto;
+        }
+        .content-box{
+            box-sizing: content-box;
+            width: 100%;
+        }
+        .border-box{
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+    </style>
+
+    <script src="//localhost:35729/livereload.js"></script>
+
+</head>
+<body>
+    <header>
+        <h2>Box Model Demo</h2>
+    </header>
+
+    <form>
+        <label><input type="checkbox" id="border"><span>Border</span></label>
+        <label><input type="checkbox" id="margin"><span>Margin</span></label>
+        <label><input type="checkbox" id="padding"><span>Padding</span></label>
+    </form>
+
+    <div id="wrap">
+        <section>
+            <div class="block-container">
+                <div class="default-box">default box<br>
+
+                </div>
+            </div>
+            <div class="block-container">
+                <div class="abs-box">abs box<br>
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: auto;</div>
+            </div>
+        </section>
+        <section>
+            <div class="block-container">
+                <div class="content-box">content box<br>
+                    box-sizing: content-box;
+                    width: 100%;
+                </div>
+            </div>
+            <div class="block-container">
+                <div class="border-box">border box<br>
+                    box-sizing: border-box;
+                    width: 100%;
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        var node = dom.byId('wrap');
+        dom.byId('border').addEventListener('click', function (e) {
+            node.classList.toggle('border', e.target.checked);
+        });
+        dom.byId('padding').addEventListener('click', function (e) {
+            node.classList.toggle('padding', e.target.checked);
+        });
+        dom.byId('margin').addEventListener('click', function (e) {
+            node.classList.toggle('margin', e.target.checked);
+        });
+    </script>
+</body>
+</html>

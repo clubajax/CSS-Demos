@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+    <title>RWD Media Queries Demo</title>
+    <meta name="alloy-status" content="ux=1,prod=0,qa=0,dev=1,roadmap=.8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!--<link rel="stylesheet" href="../../dist/components.css">-->
+    <script src="https://rawgit.com/clubajax/dom/master/src/dom.js"></script>
+    <style>
+
+        /* general styles */
+        body, html{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            font-size: 14px;
+            font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+        }
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+        header{
+            height: 80px;
+        }
+        a{
+            color: #666;
+            text-decoration: none;
+            padding: 3px 6px;
+            outline: 0;
+            transition: left 500ms;
+        }
+        h2{
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            margin-left: 0;
+        }
+        h3{}
+        section{
+            padding: 10px;
+            max-width: 1310px;
+            margin: 1px auto;
+        }
+        .card{
+            min-width: 230px;
+            position: relative;
+            padding-top: 5px;
+            padding-left: 65px !important;
+            border: 1px solid #666;
+            border-radius: 5px;
+            box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+        .item1{
+            background: #ffbab7;
+        }
+        .item2{
+            background: #cdcfff;
+        }
+        .item3{
+            background: #c1ffc6;
+        }
+        .item4{
+            background: #ffcaff;
+        }
+        .item5{
+            background: #bafffd;
+        }
+
+        .user{
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: #ccc;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            border: 2px solid white;
+            font-size: 36px;
+            line-height: 0;
+            padding: 22px 0 0 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,1) inset, 1px 1px 2px rgba(0,0,0,1);
+        }
+        .user span{
+            text-shadow: 2px 2px 4px rgba(255,255,255,1);
+        }
+        .email{
+            margin-bottom: 15px;
+        }
+
+        .user,.name,.title,.email{
+            white-space: nowrap;
+        }
+
+        .bg{
+            background: #ccc;
+            border: 5px solid #ccc;
+        }
+
+        /* examples */
+
+        .block .card{
+            /* techincally uneeded, since it is the default */
+            display: block;
+        }
+        .block .card span{
+            display: block;
+        }
+
+
+        /* rwd */
+
+        /* >= 600px */
+        @media (min-width: 600px)  {
+            .bg{ background: #c70000; }
+            h3{
+                color: white;
+            }
+        }
+
+         /*<= 400px */
+        @media (max-width: 400px)  {
+            .bg{ background: #f9ff6e; }
+        }
+    </style>
+    <script src="//localhost:35729/livereload.js"></script>
+
+</head>
+<body>
+    <header>
+        <h2>RWD Media Query Demo</h2>
+    </header>
+    <section id="example" class="bg block">
+        <h3 id="mq-report">
+            Media Query Text
+        </h3>
+        <div class="card item1">
+            <span class="user"><span>&#9822;</span></span>
+            <span class="name">Mr Mixer</span>
+            <span class="title">Pastry Artist</span>
+            <span class="email">mr@mixer.com</span>
+        </div>
+        <div class="card item2">
+            <span class="user"><span>&#9818;</span></span>
+            <span class="name">The Amazing Appleman</span>
+            <span class="title">Bobbing Specialist</span>
+            <span class="email">amazing@appleman.com</span>
+        </div>
+        <div class="card item3">
+            <span class="user"><span>&#9819;</span></span>
+            <span class="name">Superslueth</span>
+            <span class="title">Curiosity</span>
+            <span class="email">super@slueth.com</span>
+        </div>
+
+        <div class="card item4">
+            <span class="user"><span>&#9820;</span></span>
+            <span class="name">Mr Tallyman</span>
+            <span class="title">Tallyman Banana</span>
+            <span class="email">mr@tallyman.com</span>
+        </div>
+        <div class="card item5">
+            <span class="user"><span>&#9823;</span></span>
+            <span class="name">Boing Boing</span>
+            <span class="title">Rubberosity</span>
+            <span class="email">boing@boing.com</span>
+        </div>
+    </section>
+
+    <script>
+        function onMediaChange(e, isInit){
+            var
+                mq = e.srcElement;
+
+            console.log('onMediaChange', mq);
+
+            if(mq.matches){
+                reportNode.innerHTML = 'Matches: ' + mq.media;
+            }else if(!isInit){
+                reportNode.innerHTML = 'Matches no media queries';
+            }
+        }
+        var
+            reportNode = dom.byId('mq-report'),
+            mq = [
+                window.matchMedia('(min-width: 600px)'),
+                window.matchMedia('(max-width: 400px)')
+            ];
+
+        mq.forEach(function (m) {
+            m.addListener(onMediaChange);
+            onMediaChange({srcElement:m}, true);
+        });
+
+
+function onMediaChange(e){
+    var
+        mq = e.srcElement;
+    if(mq.matches){
+        reportNode.innerHTML = 'Matches: ' + mq.media;
+    }else{
+        reportNode.innerHTML = 'Matches no media queries';
+    }
+}
+var mq = window.matchMedia('(min-width: 600px)');
+mq.addListener(onMediaChange);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+<head>
+    <title>RWD Demo</title>
+    <meta name="alloy-status" content="ux=1,prod=0,qa=0,dev=1,roadmap=.8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!--<link rel="stylesheet" href="../../dist/components.css">-->
+    <script src="https://rawgit.com/clubajax/dom/master/src/dom.js"></script>
+    <style>
+
+        /* general styles */
+        body, html{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            font-size: 14px;
+            font-family: "Helvetic Neue", Helvetica, Arial, sans-serif;
+        }
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+        header{
+            height: 80px;
+        }
+        a{
+            color: #666;
+            text-decoration: none;
+            padding: 3px 6px;
+            outline: 0;
+            transition: left 250ms ease;
+        }
+        .main-menu{
+            font-weight: bold;
+            font-size: 16px;
+            padding: 0;
+        }
+
+        .main-menu a{
+            position: absolute;
+            top: 35px;
+            opacity: 1;
+            transition: opacity 500ms, left 250ms ease;
+        }
+        .main-menu a:nth-child(1){
+            left: 20px;
+        }
+        .main-menu a:nth-child(2){
+            left: 70px;
+        }
+        .main-menu a:nth-child(3){
+            left: 120px;
+        }
+        .main-menu a:nth-child(4){
+            left: 220px;
+        }
+        .main-menu a:nth-child(5){
+            left: 385px;
+        }
+        .main-menu a:nth-child(6){
+            left: 430px;
+        }
+
+
+        .sub-menu{
+            font-size: 12px;
+        }
+        .sub-menu a{
+            position: absolute;
+            top: 0;
+            opacity: 1;
+            transition: right 250ms, opacity 500ms, top 250ms;
+        }
+        .sub-menu a:nth-child(1){
+            right: 175px;
+        }
+        .sub-menu a:nth-child(2){
+            right: 80px;
+        }
+        .sub-menu a:nth-child(3){
+            right: 10px;
+        }
+
+        :target, :target:hover{
+            color: blue;
+        }
+        section a{
+            display: inline-block;
+            margin: 6px -2px 0 -2px;
+        }
+        section a:hover{
+            background: #eeeec0;
+        }
+        h2{
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        section{
+            padding: 10px;
+            max-width: 1310px;
+            margin: 1px auto;
+        }
+        .item1{
+            background: #ffbab7;
+        }
+        .item2{
+            background: #cdcfff;
+        }
+        .item3{
+            background: #c1ffc6;
+        }
+        .item4{
+            background: #ffcaff;
+        }
+        .item5{
+            background: #bafffd;
+        }
+
+        .user{
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: #ccc;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            border: 2px solid white;
+        }
+        .email{
+            margin-bottom: 15px;
+        }
+
+        .user,.name,.title,.email{
+            white-space: nowrap;
+        }
+
+        .bg{
+            background: #ccc;
+        }
+        .hamburger{
+            position: absolute;
+            width: 24px;
+            height: 18px;
+            border-top: 4px solid black;
+            border-bottom: 4px solid black;
+            opacity: 0;
+            cursor: pointer;
+            transition: opacity 250ms ease;
+        }
+        .hamburger:hover{
+            border-color: #00b3ee;
+        }
+        .hamburger:after{
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            margin-top: -2px;
+            width: 100%;
+            height: 4px;
+            background: black;
+
+        }
+        .hamburger.left{
+            top: 20px;
+            left: 20px;
+        }
+        .hamburger.right{
+            top: 20px;
+            right: 20px;
+        }
+        /* rwd */
+        /* <= 400px */
+        @media (max-width: 400px)  {
+            .bg{ background: #eee; }
+        }
+        /* >= 600px */
+        @media (min-width: 600px)  {
+            .bg{ background: #bbb; }
+        }
+
+        @media (max-width: 600px)  {
+            .bg{ background: red; }
+            h2{
+                left: 50%;
+                margin-left: -50px;
+            }
+            .hamburger{
+                opacity: 1;
+            }
+            .main-menu, .sub-menu{
+                position: inherit;
+            }
+            .main-menu a, .sub-menu a{
+                position: absolute;
+                top: 20px;
+            }
+            .main-menu a{
+                left: 20px !important;
+                opacity: 0;
+            }
+            .sub-menu a{
+                right: 20px !important;
+                opacity: 0;
+            }
+        }
+
+
+        /* examples */
+
+        .flex-box{
+            display: flex;
+            flex-flow: row wrap;
+            align-items: stretch;
+        }
+        .card{
+            min-width: 230px;
+            position: relative;
+            padding-top: 5px;
+            padding-left: 65px !important;
+            border: 1px solid #fff;
+        }
+        .flex-box .card {
+            align-self: stretch;
+            flex: 1 1 auto;
+        }
+        .flex-box.margins .card{
+            margin: 5px;
+        }
+        .flex-box .card span{
+            display: block;
+        }
+
+
+        .block .card{
+            /* techincally uneeded, since it is the default */
+            display: block;
+        }
+        .block .card span{
+            display: block;
+        }
+
+
+        .inline .card{
+            display: inline;
+        }
+        .inline-block .card{
+            display: inline-block;
+            margin: 0;
+        }
+        .inline-block .card span{
+            display: block;
+        }
+
+        .float{
+            overflow: auto;
+        }
+        .float .card{
+            display: block;
+            float: left;
+        }
+        .float .card span{
+            display: block;
+        }
+
+
+        main{
+            position: relative;
+        }
+        #example{
+            margin-left: 210px;
+            transition: margin-left 350ms ease;
+        }
+        nav{
+            width: 200px;
+            position: absolute;
+            top:0;
+            left: 0;
+            transition: width 250ms ease;
+        }
+        @media (max-width: 500px)  {
+            nav{
+                width: 45px;
+            }
+            nav menu span{
+                display: none;
+            }
+            #example{
+                margin-left: 55px;
+            }
+        }
+        menu{
+            border: 1px solid #ccc;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        menu:hover{
+            background: #fdffd8;
+        }
+
+        menu i{
+            font-size: 32px;
+            font-style: normal;
+            margin-left: 5px;
+        }
+        menu span{
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        menu i,
+        menu span{
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+    <link rel="import" href="../lib.html">
+
+    <script src="//localhost:35729/livereload.js"></script>
+
+</head>
+<body>
+    <header>
+        <h2>RWD Demo</h2>
+        <div class="hamburger left"></div>
+        <div class="hamburger right"></div>
+        <section class="main-menu">
+            <a href="#inline" id="inline">inline</a>
+            <a href="#block" id="block">block</a>
+            <a href="#inline-block" id="inline-block">inline-block</a>
+            <a href="#inline-block stretchy" id="inline-block stretchy">inline-block stretchy</a>
+            <a href="#float" id="float">float</a>
+            <a href="#float stretchy" id="float stretchy">float stretchy</a>
+        </section>
+        <section class="sub-menu">
+            <a href="#flex-box" id="flex-box">flex-box</a>
+            <a href="#flex-box margins" id="flex-box margins">flex-box margins</a>
+            <a href="#flex-box margins grid" id="flex-box margins grid">flex-box grid</a>
+        </section>
+    </header>
+    <main>
+        <nav>
+            <menu><i>&#128169;</i><span>TPS Reports</span></menu>
+            <menu><i>&#128640;</i><span>Write Code</span></menu>
+            <menu><i>&#128704;</i><span>Code Cleanup</span></menu>
+            <menu><i>&#128701;</i><span>Morning Break</span></menu>
+            <menu><i>&#127867;</i><span>Afternoon Break</span></menu>
+            <menu><i>&#127881;</i><span>Quitting Time</span></menu>
+        </nav>
+        <section id="example" class="bg">
+            <div class="card item1">
+                <span class="user"></span>
+                <span class="name">Mr Mixer</span>
+                <span class="title">Pastry Artist</span>
+                <span class="email">mr@mixer.com</span>
+            </div>
+            <div class="card item2">
+                <span class="user"></span>
+                <span class="name">The Amazing Appleman</span>
+                <span class="title">Bobbing Specialist</span>
+                <span class="email">amazing@appleman.com</span>
+            </div>
+            <div class="card item3">
+                <span class="user"></span>
+                <span class="name">Superslueth</span>
+                <span class="title">Curiosity</span>
+                <span class="email">super@slueth.com</span>
+            </div>
+
+            <div class="card item4">
+                <span class="user"></span>
+                <span class="name">Mr Tallyman</span>
+                <span class="title">Tallyman Banana</span>
+                <span class="email">mr@tallyman.com</span>
+            </div>
+            <div class="card item5">
+                <span class="user"></span>
+                <span class="name">Boing Boing</span>
+                <span class="title">Rubberosity</span>
+                <span class="email">boing@boing.com</span>
+            </div>
+        </section>
+    </main>
+    <script>
+        var
+            i,
+            hasBlanks = false,
+            all = 'block,inline,inline-block,float,stretchy,flex-box,margins'.split(','),
+            node = dom.byId('example');
+
+        function blanks(add){
+            var i, nodes;
+            if(add){
+                console.log('ADD');
+                for(i = 0; i < 5; i++){
+                    dom('div', {className:'card blank'}, node);
+                }
+            }else if(hasBlanks){
+                nodes = dom.queryAll(node, '.blank');
+                console.log('REMOVE', nodes);
+                for(i = nodes.length-1; i >= 0; i--){
+                    dom.destroy(nodes[i]);
+                }
+            }
+            hasBlanks = add;
+        }
+
+        function setClassName(){
+            var
+                addBlanks = false,
+                className = (location.hash || '').replace('#','') || 'block';
+            all.forEach(function (className) {
+                node.classList.remove(className);
+            });
+            dom.classList.add(node, className);
+            blanks(className.indexOf('grid') > -1);
+        }
+        on(window, 'hashchange', setClassName);
+        setClassName();
+
+        function cleanWhiteSpace() {
+            for (i = node.childNodes.length - 1; i >= 0; i--) {
+                if (node.childNodes[i].nodeType === 3) {
+                    node.removeChild(node.childNodes[i]);
+                }
+            }
+        }
+        cleanWhiteSpace();
+    </script>
+
+</body>
+</html>
